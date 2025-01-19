@@ -1,62 +1,62 @@
-//Prototypes
-//0x01 - User Quit Notification
+// Prototypes
+// 0x01 - User Quit Notification
 void userQuitNotification(unsigned short position, int slot);
 void userQuitRequest();
-//0x02 - User Joined
+// 0x02 - User Joined
 void userJoined(unsigned short position, int slot);
-//0x03 - User Login Information
+// 0x03 - User Login Information
 void userLoginInformation(short lenUsername, short lenEmulator);
-//0x04 - Server Status
+// 0x04 - Server Status
 void serverStatus(unsigned short position, int slot);
-//0x05 - ACK
+// 0x05 - ACK
 void serverToClientAck();
-//0x07 - Global Chat Notification
+// 0x07 - Global Chat Notification
 void globalChatNotification(unsigned short position, int slot);
 void globalChatRequest();
-//0x08 - Game Chat Notification
+// 0x08 - Game Chat Notification
 void gameChatNotification(unsigned short position, int slot);
 void gameChatRequest();
-//0x09 - Client Keep Alive
+// 0x09 - Client Keep Alive
 void clientKeepAlive();
-//0x0A - Create Game Notification
+// 0x0A - Create Game Notification
 void createGameNotification(unsigned short position, int slot);
 void createGameRequest();
-//0x0B - Quit Game Notification
+// 0x0B - Quit Game Notification
 void quitGameNotification(unsigned short position, int slot);
 void quitGameRequest();
-//0x0C - Join Game Notification
+// 0x0C - Join Game Notification
 void joinGameNotification(unsigned short position, int slot);
 void joinGameRequest();
-//0x0D - Player Information
+// 0x0D - Player Information
 void playerInformation(unsigned short position, int slot);
-//0x0E - Update Game Status
+// 0x0E - Update Game Status
 void updateGameStatus(unsigned short position, int slot);
-//0x0F - Kick Request
+// 0x0F - Kick Request
 void kickRequest();
-//0x10 - Close Game Notification
+// 0x10 - Close Game Notification
 void closeGameNotification(unsigned short position, int slot);
-//0x11 - Start Game Notification
+// 0x11 - Start Game Notification
 void startGameNotification(unsigned short position, int slot);
 void startGameRequest();
-//0x12 - Game Data
+// 0x12 - Game Data
 void gameDataRecv(unsigned short position, int slot);
 void gameDataSend();
-//0x13 - Game Cache
+// 0x13 - Game Cache
 void gameCacheRecv(unsigned short position, int slot);
-//void gameCacheSend(char pos);
-//0x14 - Drop Game Notification
+// void gameCacheSend(char pos);
+// 0x14 - Drop Game Notification
 void dropGameNotification(unsigned short position, int slot);
 void dropGameRequest();
-//0x15 - Ready to Play Notification
+// 0x15 - Ready to Play Notification
 void readyToPlayNotificaiton();
 void readyToPlayRequest();
-//0x16 - Connection Rejected Notification
+// 0x16 - Connection Rejected Notification
 void connectionRejectedNotification(unsigned short position, int slot);
-//0x17 - Server Information Message
+// 0x17 - Server Information Message
 void serverInformationMessage(unsigned short position, int slot);
 
-
-struct RECENT_SERVERS{
+struct RECENT_SERVERS
+{
 	char server[1024];
 	char ip[1024];
 	char location[1024];
@@ -65,8 +65,8 @@ int const RECENT_MAX = 25;
 RECENT_SERVERS recentServers[RECENT_MAX];
 int recentCount = -1;
 
-
-struct FAVORITE_SERVERS{
+struct FAVORITE_SERVERS
+{
 	char server[1024];
 	char ip[1024];
 	char location[1024];
@@ -76,17 +76,11 @@ int const FAVORITE_MAX = 25;
 FAVORITE_SERVERS favoriteServers[FAVORITE_MAX];
 int favoriteCount = -1;
 
-
-
-
-//void p2pGameData(char *data, int dLen);
-//void p2pGameChat(char *data, int dLen);
-//void p2pGameStart(char *data, int dLen);
-//void p2pGameDrop(char *data, int dLen);
-//void p2pGameReady(char *data, int dLen);
-
-
-
+// void p2pGameData(char *data, int dLen);
+// void p2pGameChat(char *data, int dLen);
+// void p2pGameStart(char *data, int dLen);
+// void p2pGameDrop(char *data, int dLen);
+// void p2pGameReady(char *data, int dLen);
 
 void loginToServer();
 void popupMenu(char num);
@@ -115,14 +109,14 @@ void gamelistAdditem(char *game, char *version, char *owner, char *status, char 
 void userlistAdditem(char *nick, char *ping, char *connection, char *userID, char *status);
 void userlistAdditemAll();
 void gamelistAdditemAll();
-LRESULT CALLBACK  WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 DWORD WINAPI callGameCallback(LPVOID lpParam);
 DWORD WINAPI recvLoop(LPVOID lpParam);
 DWORD WINAPI pingKailleraServers(LPVOID lpParam);
 DWORD WINAPI ping3DServers(LPVOID lpParam);
 DWORD WINAPI continuousLoop(LPVOID lpParam);
-//DWORD WINAPI p2pLoop(LPVOID lpParam);
-//HANDLE p2pThread;
+// DWORD WINAPI p2pLoop(LPVOID lpParam);
+// HANDLE p2pThread;
 int CALLBACK lstUserlistCompareFunc(LPARAM i1, LPARAM i2, LPARAM);
 int CALLBACK lstGamelistCompareFunc(LPARAM i1, LPARAM i2, LPARAM);
 int CALLBACK lstServerlistKCompareFunc(LPARAM i1, LPARAM i2, LPARAM);
@@ -147,9 +141,9 @@ WNDPROC EditProcTxtQuit;
 long CALLBACK SubProcTxtNick(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 WNDPROC EditProcTxtNick;
 
-char * strToLower(TCHAR *str);
+char *strToLower(TCHAR *str);
 
-//Control Properties
+// Control Properties
 DWORD const formProperties = WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU | WS_CAPTION | WS_VISIBLE;
 DWORD const formOtherProperties = WS_OVERLAPPED | WS_SYSMENU | WS_CAPTION | WS_VISIBLE;
 DWORD const buttonProperties = BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP;
@@ -159,9 +153,9 @@ DWORD const comboboxProperties = CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_V
 DWORD const richTextboxProperties = ES_MULTILINE | WS_CHILD | WS_VISIBLE;
 DWORD const listviewProperties = LVS_SHOWSELALWAYS | LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_TABSTOP;
 DWORD const controlStyles = NULL;
-DWORD const formStyles = WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE ;
+DWORD const formStyles = WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE;
 DWORD const listviewStyles = LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES;
-DWORD const labelProperties =  SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP;
+DWORD const labelProperties = SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP;
 DWORD const tabProperties = TCS_TABS | WS_CHILD | WS_VISIBLE | WS_TABSTOP;
 DWORD const checkProperties = BS_AUTOCHECKBOX | BS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_TABSTOP;
 HWND form1;
@@ -179,17 +173,17 @@ HWND chkDrop;
 int dropValue;
 HWND chkBeep;
 HWND btnDrop;
-//HWND btnP2PServer;
-//HWND btnP2PConnect;
+// HWND btnP2PServer;
+// HWND btnP2PConnect;
 HWND chkJoinChatGame;
 HWND btnVersion;
-//HWND txtP2PServer;
-//HWND lblP2PServer;
-//char p2pServer[1024];
-//HWND txtP2PPort;
-//HWND lblP2PPort;
-//char p2pPort[1024];
-//HWND btnP2PStart;
+// HWND txtP2PServer;
+// HWND lblP2PServer;
+// char p2pServer[1024];
+// HWND txtP2PPort;
+// HWND lblP2PPort;
+// char p2pPort[1024];
+// HWND btnP2PStart;
 HWND chkUseScreenChat;
 HWND chkKeepGameChatLogs;
 HWND chkKeepChatLogs;
@@ -232,8 +226,8 @@ HWND lstRecentList;
 HWND lstWaitingList;
 HWND lstFavoriteList;
 
-
-struct AWAY_MESSAGES{
+struct AWAY_MESSAGES
+{
 	char subject[1024];
 	char message[1024];
 	int item;
@@ -243,7 +237,7 @@ AWAY_MESSAGES awayMessages[10];
 int awayMessageCount = 0;
 int const AWAY_MESSAGE_MAX = 10;
 
-//Away
+// Away
 HWND frmAway;
 HWND txtAwayMessage;
 HWND txtAwayMessageSubject;
@@ -264,7 +258,7 @@ void awayAdditem(char subject[], char message[], int value);
 void showAway();
 bool imAway = false;
 
-//PM
+// PM
 void createPMWindow();
 HWND btnPM;
 HWND frmPM;
@@ -272,7 +266,7 @@ HWND txtPM;
 char fPM[1024];
 bool cPM = false;
 
-//Comments
+// Comments
 void createCommentsWindow();
 HWND btnComments;
 HWND frmComments;
@@ -288,7 +282,7 @@ HWND txtEServer;
 HWND btnEOkay;
 bool editFavorite = false;
 
-//Chatroom
+// Chatroom
 HWND lstUserlist;
 HWND lstGamelist;
 HWND btnCreate;
@@ -361,22 +355,23 @@ bool gameroom = false;
 HINSTANCE hInstance;
 HFONT hDefaultFont;
 
-//Winsock Stuff
+// Winsock Stuff
 WSADATA startupInfo;
 int mySocket;
 int mySocketK;
 int mySocket3D;
-//int p2pSocket;
+// int p2pSocket;
 int mySocketWaiting;
-//sockaddr_in p2pServerInfo;
-//int p2pClientLength;
-//sockaddr_in p2pClientInfo;
+// sockaddr_in p2pServerInfo;
+// int p2pClientLength;
+// sockaddr_in p2pClientInfo;
 sockaddr_in socketInfo;
 sockaddr_in socketInfoK;
 sockaddr_in socketInfo3D;
 sockaddr_in socketInfoWaiting;
 
-struct SERVER_LIST{
+struct SERVER_LIST
+{
 	char host[128];
 	char link[128];
 	char wglink[128];
@@ -385,15 +380,14 @@ struct SERVER_LIST{
 
 SERVER_LIST kailleraServerList;
 SERVER_LIST anti3DServerList;
-//http://master.anti3d.com/raw_server_list2.php
-//http://kaillera.com/raw_server_list2.php?wg=1&version=0.9
+// http://master.anti3d.com/raw_server_list2.php
+// http://kaillera.com/raw_server_list2.php?wg=1&version=0.9
 
-
-struct USER_LIST_COMMANDS{
+struct USER_LIST_COMMANDS
+{
 	char commands[128];
 	int time;
 };
-
 
 USER_LIST_COMMANDS userlistCommands[60];
 
@@ -405,12 +399,12 @@ HANDLE ping3DThread;
 bool pingingK = false;
 bool pinging3D = false;
 
-//Kaillera Stuff
+// Kaillera Stuff
 char entryMsg[11] = "HELLO0.83\0";
 u_short myPort = 27888;
 char myAddress[512];
 
-//Outbound Data
+// Outbound Data
 char globalPacket[15000];
 unsigned short globalPacketSize;
 unsigned short normalPacketSize;
@@ -419,48 +413,46 @@ char myBuffServerListK[10000];
 char myBuffServerList3D[10000];
 char myBuffWaiting[10000];
 long serversLastMessage;
-//Inbound Data
+// Inbound Data
 long msgCount;
 long bytesRecvServerListK;
 long bytesRecvServerList3D;
 long bytesRecvWaiting;
-//Outbound Data
+// Outbound Data
 unsigned short const MESSAGE_SIZE = 15;
 unsigned short const MESSAGE_LENGTH = 5000;
 unsigned short const MAX_INCOMING_BUFFER = 15;
 
-
-struct INCOMING_BUFFER{
+struct INCOMING_BUFFER
+{
 	char myBuff[MESSAGE_LENGTH * MESSAGE_SIZE];
 };
 
 INCOMING_BUFFER myBuff[MAX_INCOMING_BUFFER];
 int myBuffCount = -1;
 
-
-
-struct Messages{
-    //char msgData[MESSAGE_LENGTH];
-    unsigned char msgType;
-    unsigned short msgLen;
-    //unsigned short msgNum;
+struct Messages
+{
+	// char msgData[MESSAGE_LENGTH];
+	unsigned char msgType;
+	unsigned short msgLen;
+	// unsigned short msgNum;
 	unsigned long msgPos;
 };
 Messages serverMessage[MESSAGE_SIZE];
 
-
-enum ConnectionType{
-    lan = 1,
-    excellent = 2,
-    good = 3,
+enum ConnectionType
+{
+	lan = 1,
+	excellent = 2,
+	good = 3,
 	average = 4,
 	low = 5,
 	bad = 6
 };
 
-
-
-struct USERS{
+struct USERS
+{
 	char nick[1024];
 	char ping[1024];
 	char status[1024];
@@ -470,7 +462,8 @@ struct USERS{
 USERS tempUsers[1000];
 int tempUserCount = 0;
 
-struct GAMES{
+struct GAMES
+{
 	char game[1024];
 	char gameID[1024];
 	char emulator[1024];
@@ -481,18 +474,15 @@ struct GAMES{
 GAMES tempGames[1000];
 int tempGameCount = 0;
 
-
-
-struct Packets{
-    char packet[6000];
+struct Packets
+{
+	char packet[6000];
 };
 const int MAX_PACKETS = 3;
 const int NORMAL_PACKETS = 3;
 Packets myPackets[MAX_PACKETS];
 
-
-
-//Information
+// Information
 int xPos = 0;
 int yPos = 0;
 char myServer[1024] = "Not in a Server\0";
@@ -500,20 +490,21 @@ char username[1024] = "Please enter a username!\0";
 char emulator[128];
 char serverIP[1024] = "127.0.0.1:27888\0";
 unsigned long myPing;
-//################
+// ################
 char myVersion[17] = "SCCPPE v0.89.10\0";
 char cVersion[26] = "SupraclientCPPE v0.89.10\0";
 char initText[1024] = "Supraclient CPPE [C++ Edition]\r\nVersion: 0.89.10  Sunday Jan 22, 2023\r\nSpecial Thanks to: Trac, Moosehead, & r@z\r\nOther Testers: Morphus56K, Paramount, Agenda Suicide, & okaygo\r\nAuthor: SupraFast - Daniel Strusser\r\nEmail: Dynomite1234@aol.com\r\n\r\n#To get started, click on the button below that says [Servers]\n\0";
 char quit[1024] = "I'm using SupraclientCPPE v0.89.10\0";
-//################
+// ################
 bool chatroom;
 
 int mainBytesRecv;
 long myGameID = -1;
 long myUserID = -1;
-hostent* hp;
+hostent *hp;
 
-struct Games{
+struct Games
+{
 	char game[1024];
 };
 char lastGameToPlay1[1024] = "LastGameToPlay1\0";
@@ -521,8 +512,6 @@ char lastGameToPlay2[1024] = "LastGameToPlay2\0";
 char lastGameToPlay3[1024] = "LastGameToPlay3\0";
 Games gameList[65535];
 unsigned short totalGames = 0;
-
-
 
 void showOptions(char show);
 
@@ -534,7 +523,7 @@ unsigned short inputSize;
 int sizeOfEinput;
 bool startedGame = false;
 bool iQuit = false;
-char currentGame[128];// = "Marvel Vs. Capcom: Clash of Super Heroes (US 980123)";
+char currentGame[128]; // = "Marvel Vs. Capcom: Clash of Super Heroes (US 980123)";
 char gOwner[1024];
 char gEmulator[1024];
 char stage = 0;
@@ -593,6 +582,5 @@ void exitThreads();
 void exitPingKThread();
 void exitPing3DThread();
 void copyToClipboard(LPSTR lpCmdLine);
-
 
 bool hosting = false;
