@@ -1374,91 +1374,132 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
       }
 
       /*else if(hwndCtl == btnP2PServer){
-              /* Open windows connection *
+              /* Open windows
+         connection *
               if (WSAStartup(0x0101, &startupInfo) != 0){
-                      MessageBox(NULL, "Could not open Windows connection.",
-      "WSAStartup Error", NULL);
+
+         MessageBox(NULL, "Could not open Windows connection.",
+ "WSAStartup
+         Error", NULL);
               }
-              /* Open a datagram socket *
+              /* Open a datagram socket
+         *
               p2pSocket = socket(AF_INET, SOCK_DGRAM, 0);
-              if (p2pSocket == INVALID_SOCKET){
-                      MessageBox(NULL, "Could not create socket!.", "Socket
-      Error", NULL); WSACleanup();
+ if
+         (p2pSocket == INVALID_SOCKET){
+                      MessageBox(NULL,
+         "Could not create socket!.", "Socket
+      Error", NULL);
+         WSACleanup();
               }
               /* Set family and port *
-              p2pServerInfo.sin_family = AF_INET;
-              p2pServerInfo.sin_port = htons(7159);
-              p2pServerInfo.sin_addr.s_addr = inet_addr("127.0.0.1");
+
+         p2pServerInfo.sin_family = AF_INET;
+ p2pServerInfo.sin_port =
+         htons(7159);
+              p2pServerInfo.sin_addr.s_addr =
+         inet_addr("127.0.0.1");
 
               /* Bind address to socket *
-              if (bind(p2pSocket, (struct sockaddr *)&p2pServerInfo,
-      sizeof(struct sockaddr_in)) == -1){ MessageBox(NULL, "Could not bind to
-      socket!.", "Bind Error", NULL); closesocket(p2pSocket); WSACleanup();
-              }
+ if
+         (bind(p2pSocket, (struct sockaddr *)&p2pServerInfo,
+      sizeof(struct
+         sockaddr_in)) == -1){ MessageBox(NULL, "Could not bind to
+ socket!.",
+         "Bind Error", NULL); closesocket(p2pSocket); WSACleanup();
+ }
 
-              p2pClientLength = (int)sizeof(struct sockaddr_in);
-              p2pThread = CreateThread(NULL, 0, p2pLoop, NULL, 0, NULL);
+
+         p2pClientLength = (int)sizeof(struct sockaddr_in);
+ p2pThread =
+         CreateThread(NULL, 0, p2pLoop, NULL, 0, NULL);
       }
-      else if(hwndCtl == btnP2PConnect){
+      else
+         if(hwndCtl == btnP2PConnect){
               supraCleanup(4, 0);
 
-              p2pSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
-              //Length of ServerIP:Port
-              short lenServerIP = (short)GetWindowTextLength(txtP2PServer);
+         p2pSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
-              if(lenServerIP < 1){
-                      MessageBox(form1,"Invalid Address Format!", "Address
+ //Length of
+         ServerIP:Port
+              short lenServerIP =
+         (short)GetWindowTextLength(txtP2PServer);
+
+              if(lenServerIP
+         < 1){
+                      MessageBox(form1,"Invalid Address Format!",
+         "Address
       Error!", NULL); return 0;
               }
 
-              //Get ServerIP:Port
-              GetWindowText(txtP2PServer, ip, lenServerIP + 1);
+ //Get
+         ServerIP:Port
+              GetWindowText(txtP2PServer, ip, lenServerIP
+         + 1);
               //Find:
               char* c = strstr(ip, ":");
 
-              if(c != NULL){
-                      //Split Port
-                      strcpy(temp, c + 1);
-                      //Split Address and Port
-                      ZeroMemory(server, 512);
-                      strncpy(server, ip, (lenServerIP - strlen(temp) - 1));
-                      i = (u_short)atoi(temp);
-              }
-              else{
-                      ZeroMemory(server, 512);
-                      GetWindowText(txtP2PServer, server, lenServerIP + 1);
-                      i = 7159;
-              }
 
-              p2pServerInfo.sin_family = AF_INET;
-              p2pServerInfo.sin_port = htons(i);
+         if(c != NULL){
+                      //Split Port
+ strcpy(temp, c +
+         1);
+                      //Split Address and Port
+ ZeroMemory(server,
+         512);
+                      strncpy(server, ip, (lenServerIP -
+         strlen(temp) - 1));
+                      i = (u_short)atoi(temp);
+ }
+
+         else{
+                      ZeroMemory(server, 512);
+
+         GetWindowText(txtP2PServer, server, lenServerIP + 1);
+ i = 7159;
+ }
+
+
+         p2pServerInfo.sin_family = AF_INET;
+ p2pServerInfo.sin_port =
+         htons(i);
 
               unsigned long addr;
 
-              if(inet_addr(server) == INADDR_NONE){
+ if(inet_addr(server) ==
+         INADDR_NONE){
                       hp = gethostbyname(server);
-                      if(hp == NULL){
+ if(hp
+         == NULL){
                               closesocket(p2pSocket);
-                              MessageBox(form1, "Error Resolving!", "Error!",
+
+         MessageBox(form1, "Error Resolving!", "Error!",
       NULL); return 0;
-                      }
+
+         }
                       p2pServerInfo.sin_addr.s_addr = *((unsigned
-      long*)hp->h_addr);
+
+         long*)hp->h_addr);
               }
               else{
-                      p2pServerInfo.sin_addr.s_addr = inet_addr(myAddress);
-              }
+
+         p2pServerInfo.sin_addr.s_addr = inet_addr(myAddress);
+ }
 
 
-              p2pThread = CreateThread(NULL, 0, p2pLoop, NULL, 0, NULL);
+ p2pThread =
+         CreateThread(NULL, 0, p2pLoop, NULL, 0, NULL);
 
-              sendto(p2pSocket, "GAME_START",  10, NULL, (sockaddr *)
-      &p2pServerInfo, sizeof(p2pServerInfo));
+ sendto(p2pSocket,
+         "GAME_START",  10, NULL, (sockaddr *)
+      &p2pServerInfo,
+         sizeof(p2pServerInfo));
 
 
       }
-      else if(hwndCtl == btnP2PStart){
+      else if(hwndCtl ==
+         btnP2PStart){
 
       }*/
 
@@ -1691,9 +1732,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
 
       /*strcpy(temp, userlistCommands[0].commands);
       strcat(temp, temp1);
-      //Send
+
+       * //Send
       SendMessage(txtChat, WM_SETTEXT, 0, (LPARAM) temp);
-      globalChatRequest();*/
+
+       * globalChatRequest();*/
 
       EnableWindow(form1, FALSE);
       createPMWindow();
@@ -2531,34 +2574,59 @@ void createInitialWindow() {
 
   // P2P
   /*txtP2PServer = CreateWindowEx(WS_EX_CLIENTEDGE, "EDIT", p2pServer,
-  textboxProperties, 10, 520, 210,25, form1, NULL, hInstance, NULL);
-  SendMessage(txtP2PServer, WM_SETFONT, (WPARAM)hDefaultFont, MAKELPARAM(FALSE,
-  0)); lblP2PServer = CreateWindowEx(controlStyles, "STATIC", "Server IP:",
-  labelProperties, 10, 505, 210, 15, form1, NULL, hInstance, NULL);
-  SendMessage(lblP2PServer, WM_SETFONT, (WPARAM)hDefaultFont, MAKELPARAM(FALSE,
+
+   * textboxProperties, 10, 520, 210,25, form1, NULL, hInstance, NULL);
+
+   * SendMessage(txtP2PServer, WM_SETFONT, (WPARAM)hDefaultFont,
+   * MAKELPARAM(FALSE,
+  0)); lblP2PServer = CreateWindowEx(controlStyles,
+   * "STATIC", "Server IP:",
+  labelProperties, 10, 505, 210, 15, form1, NULL,
+   * hInstance, NULL);
+  SendMessage(lblP2PServer, WM_SETFONT,
+   * (WPARAM)hDefaultFont, MAKELPARAM(FALSE,
   0));
   //P2P Port Textbox
-  txtP2PPort = CreateWindowEx(WS_EX_CLIENTEDGE, "EDIT", p2pPort,
-  textboxProperties, 225, 520, 60,25, form1, NULL, hInstance, NULL);
-  SendMessage(txtP2PPort, WM_SETFONT, (WPARAM)hDefaultFont, MAKELPARAM(FALSE,
-  0)); lblP2PPort = CreateWindowEx(controlStyles, "STATIC", "Port#:",
-  labelProperties, 225, 505, 60, 15, form1, NULL, hInstance, NULL);
-  SendMessage(lblP2PPort, WM_SETFONT, (WPARAM)hDefaultFont, MAKELPARAM(FALSE,
+
+   * txtP2PPort = CreateWindowEx(WS_EX_CLIENTEDGE, "EDIT", p2pPort,
+
+   * textboxProperties, 225, 520, 60,25, form1, NULL, hInstance, NULL);
+
+   * SendMessage(txtP2PPort, WM_SETFONT, (WPARAM)hDefaultFont,
+   * MAKELPARAM(FALSE,
+  0)); lblP2PPort = CreateWindowEx(controlStyles,
+   * "STATIC", "Port#:",
+  labelProperties, 225, 505, 60, 15, form1, NULL,
+   * hInstance, NULL);
+  SendMessage(lblP2PPort, WM_SETFONT,
+   * (WPARAM)hDefaultFont, MAKELPARAM(FALSE,
   0));
   //Login Button
-  btnP2PStart = CreateWindowEx(controlStyles, "BUTTON", "Start",
-  buttonProperties, 500, 530, 60,25, form1, NULL, hInstance, NULL);
-  SendMessage(btnP2PStart, WM_SETFONT, (WPARAM)hDefaultFont, MAKELPARAM(FALSE,
+
+   * btnP2PStart = CreateWindowEx(controlStyles, "BUTTON", "Start",
+
+   * buttonProperties, 500, 530, 60,25, form1, NULL, hInstance, NULL);
+
+   * SendMessage(btnP2PStart, WM_SETFONT, (WPARAM)hDefaultFont,
+   * MAKELPARAM(FALSE,
   0));
   //Connect
-  btnP2PConnect = CreateWindowEx(controlStyles, "BUTTON", "Connect to Server",
-  buttonProperties,290, 520, 100, 25, form1, NULL, hInstance, NULL);
-  SendMessage(btnP2PConnect, WM_SETFONT, (WPARAM)hDefaultFont, MAKELPARAM(FALSE,
+  btnP2PConnect =
+   * CreateWindowEx(controlStyles, "BUTTON", "Connect to Server",
+
+   * buttonProperties,290, 520, 100, 25, form1, NULL, hInstance, NULL);
+
+   * SendMessage(btnP2PConnect, WM_SETFONT, (WPARAM)hDefaultFont,
+   * MAKELPARAM(FALSE,
   0));
   //Server
-  btnP2PServer = CreateWindowEx(controlStyles, "BUTTON", "Start as Server",
-  buttonProperties, 395, 520, 100, 25, form1, NULL, hInstance, NULL);
-  SendMessage(btnP2PServer, WM_SETFONT, (WPARAM)hDefaultFont, MAKELPARAM(FALSE,
+  btnP2PServer =
+   * CreateWindowEx(controlStyles, "BUTTON", "Start as Server",
+
+   * buttonProperties, 395, 520, 100, 25, form1, NULL, hInstance, NULL);
+
+   * SendMessage(btnP2PServer, WM_SETFONT, (WPARAM)hDefaultFont,
+   * MAKELPARAM(FALSE,
   0));*/
 
   // Quit Textbox
@@ -5135,10 +5203,13 @@ int saveConfig() {
 
   // P2P Server
   /*GetWindowText(txtP2PServer, p2pServer, GetWindowTextLength(txtP2PServer) +
-  1); config << "P2P_Server=" << p2pServer << "\n";
+
+   * 1); config << "P2P_Server=" << p2pServer << "\n";
   //P2P Port
-  GetWindowText(txtP2PPort, p2pPort, GetWindowTextLength(txtP2PPort) + 1);
-  config << "P2P_Port=" << p2pPort << "\n";*/
+
+   * GetWindowText(txtP2PPort, p2pPort, GetWindowTextLength(txtP2PPort) + 1);
+
+   * config << "P2P_Port=" << p2pPort << "\n";*/
 
   // EmuSF_Emulator
   v = SendMessage(chkEmuRes, BM_GETCHECK, 0, 0);
@@ -5356,42 +5427,56 @@ DWORD WINAPI continuousLoop(LPVOID lpParam) {
 
 /*DWORD WINAPI p2pLoop(LPVOID lpParam){
         char temp[5000];
-        int rBytes;
+        int
+ * rBytes;
 
         for( ; ; ){
                 /* Receive bytes from client *
-                rBytes = recvfrom(p2pSocket, temp, 5000, 0, (struct sockaddr
+
+ * rBytes = recvfrom(p2pSocket, temp, 5000, 0, (struct
+ * sockaddr
 *)&p2pClientInfo, &p2pClientLength);
 
-                if(rBytes > 0){
+                if(rBytes >
+ * 0){
                         if(strncmp(temp, "GAME_DATA", 9)){
-                                p2pGameData(&temp[9], rBytes - 9);
+
+ * p2pGameData(&temp[9], rBytes - 9);
                         }
-                        else if(strncmp(temp, "GAME_CHAT", 9)){
-                                p2pGameChat(&temp[9], rBytes - 9);
+ else
+ * if(strncmp(temp, "GAME_CHAT", 9)){
+ p2pGameChat(&temp[9], rBytes - 9);
+ }
+
+ * else if(strncmp(temp, "GAME_READY", 10)){
+ p2pGameReady(&temp[9], rBytes -
+ * 10);
                         }
-                        else if(strncmp(temp, "GAME_READY", 10)){
-                                p2pGameReady(&temp[9], rBytes - 10);
+                        else if(strncmp(temp,
+ * "GAME_START", 10)){
+                                p2pGameStart(&temp[9],
+ * rBytes - 10);
+ MessageBox(NULL,"Start",NULL,NULL);
                         }
-                        else if(strncmp(temp, "GAME_START", 10)){
-                                p2pGameStart(&temp[9], rBytes - 10);
-                                MessageBox(NULL,"Start",NULL,NULL);
-                        }
-                        else if(strncmp(temp, "GAME_DROP", 9)){
-                                p2pGameDrop(&temp[9], rBytes - 9);
-                                return 0;
+
+ * else if(strncmp(temp, "GAME_DROP", 9)){
+ p2pGameDrop(&temp[9], rBytes - 9);
+
+ * return 0;
                         }
                 }
         }
 
-        return 0;
+ return
+ * 0;
 }
 
 void p2pGameReady(char *data, int dLen){
 
 }
 
-void p2pGameData(char *data, int dLen){
+void p2pGameData(char
+ * *data, int dLen){
 
 }
 
@@ -5399,11 +5484,13 @@ void p2pGameChat(char *data, int dLen){
 
 }
 
-void p2pGameStart(char *data, int dLen){
+void
+ * p2pGameStart(char *data, int dLen){
 
 }
 
-void p2pGameDrop(char *data, int dLen){
+void p2pGameDrop(char *data, int
+ * dLen){
 
 }*/
 
@@ -5560,68 +5647,100 @@ void parseData(int slot, unsigned char msgType) {
 void parseData(){
         char i;
         unsigned long w;
-        unsigned short temp;
+        unsigned
+ * short temp;
         unsigned char numOfMessages;
-        unsigned short msgNum;
+        unsigned short
+ * msgNum;
         unsigned char msgType;
 
-        //how many messages are in packet
+        //how many messages are in
+ * packet
         numOfMessages = *(unsigned char *) &myBuff[slot].myBuff[0];
-        msgNum = *(unsigned short *) &myBuff[slot].myBuff[1];
-        msgType = *(unsigned char *) &myBuff[slot].myBuff[5];
 
-        if(msgType < 0x01 || msgType > 0x17){
-                MessageBox(form1,"Received Unknown Message!", "Error in
+ * msgNum = *(unsigned short *) &myBuff[slot].myBuff[1];
+        msgType =
+ * *(unsigned char *) &myBuff[slot].myBuff[5];
+
+        if(msgType < 0x01 ||
+ * msgType > 0x17){
+                MessageBox(form1,"Received Unknown
+ * Message!", "Error in
 parseData()", NULL); return;
         }
 
-        if(msgNum > serversLastMessage || serversLastMessage == 0){
-                //increases speed to not process every message
+ if(msgNum >
+ * serversLastMessage || serversLastMessage == 0){
+                //increases
+ * speed to not process every message
                 if(msgNum > 0)
-                        numOfMessages = msgNum - serversLastMessage;
 
-                if(numOfMessages > myBuff[0])
-                        numOfMessages = myBuff[0];
+ * numOfMessages = msgNum - serversLastMessage;
+
+ if(numOfMessages > myBuff[0])
+
+ * numOfMessages = myBuff[0];
 
                 temp = 1;
-                for(i = 0; i < numOfMessages; i++){
-                        serverMessage[i].msgNum = *(unsigned short *)
-&myBuff[slot].myBuff[temp]; temp = temp + 2; serverMessage[i].msgLen =
-*(unsigned short *) &myBuff[slot].myBuff[temp]; temp = temp + 2;
-                        serverMessage[i].msgType = *(unsigned char *)
-&myBuff[slot].myBuff[temp]; temp = temp + 1; for(w = 0; w <
-serverMessage[i].msgLen; w++) serverMessage[i].msgData[w] = myBuff[temp + w];
+                for(i =
+ * 0; i < numOfMessages; i++){
+                        serverMessage[i].msgNum =
+ * *(unsigned short *)
+&myBuff[slot].myBuff[temp]; temp = temp + 2;
+ * serverMessage[i].msgLen =
+*(unsigned short *) &myBuff[slot].myBuff[temp];
+ * temp = temp + 2;
+                        serverMessage[i].msgType =
+ * *(unsigned char *)
+&myBuff[slot].myBuff[temp]; temp = temp + 1; for(w = 0; w
+ * <
+serverMessage[i].msgLen; w++) serverMessage[i].msgData[w] = myBuff[temp +
+ * w];
                         temp = temp + serverMessage[i].msgLen;
-                }
+ }
 
-                if(numOfMessages == 1){
+
+ * if(numOfMessages == 1){
                         serversLastMessage = msgNum;
-                        gotoMessageType(0, serverMessage[0].msgType);
-                        return;
-                }
-                else{
-                        if((msgNum - serversLastMessage) > myBuff[0]){
-                                //Trigger Server Retry Algorithm by sending the
-last packet with the same Message Number sendto(mySocket, globalPacket,
-globalPacketSize, NULL, (sockaddr *) &socketInfo, sizeof(socketInfo));
-                                //MessageBox(form1,"Client dropped packet(s).
-Desynch may occur or server updates may be missed.  Please relogin!", "Error -
-Dropped Packet(s)", NULL);
-                                //displayChatroomAsServer("Client dropped
-packet(s).  Desynch may occur or server updates may be missed.  Please
-relogin!"); return;
-                        }
 
-                        i = i - 1;
-                        //store current message number in last message for next
-time. temp = serversLastMessage; serversLastMessage = msgNum;
-                        //recover messages
-                        while(i >= 0){
-                                if(temp <= serverMessage[i].msgNum)
-                                        gotoMessageType(i,
-serverMessage[i].msgType); i = i - 1;
-                        }
+ * gotoMessageType(0, serverMessage[0].msgType);
+ return;
                 }
+
+ * else{
+                        if((msgNum - serversLastMessage) > myBuff[0]){
+
+ * //Trigger Server Retry Algorithm by sending the
+last packet with the same
+ * Message Number sendto(mySocket, globalPacket,
+globalPacketSize, NULL,
+ * (sockaddr *) &socketInfo, sizeof(socketInfo));
+ //MessageBox(form1,"Client
+ * dropped packet(s).
+Desynch may occur or server updates may be missed.  Please
+ * relogin!", "Error -
+Dropped Packet(s)", NULL);
+
+ * //displayChatroomAsServer("Client dropped
+packet(s).  Desynch may occur or
+ * server updates may be missed.  Please
+relogin!"); return;
+ }
+
+ i = i - 1;
+
+ * //store current message number in last message for next
+time. temp =
+ * serversLastMessage; serversLastMessage = msgNum;
+ //recover messages
+ while(i
+ * >= 0){
+                                if(temp <= serverMessage[i].msgNum)
+
+ * gotoMessageType(i,
+serverMessage[i].msgType); i = i - 1;
+ }
+ }
         }
 }
 */
@@ -5897,7 +6016,8 @@ bool supraCleanup(char type, HWND h) {
   // P2P
   /*else if(type == 4){
           closesocket(p2pSocket);
-          TerminateThread(p2pThread, 0);
+
+   * TerminateThread(p2pThread, 0);
           CloseHandle(p2pThread);
   }*/
   return false;
@@ -7018,31 +7138,37 @@ void serverToClientAck() {
 /*
 //0x05 - Client to Server ACK
 void clientToServerAck(){
-        char ack[17];
+        char
+ * ack[17];
 
         ack[0] = 0;
 
         ack[1] = 0;
         ack[2] = 0;
-        ack[3] = 0;
+
+ * ack[3] = 0;
         ack[4] = 0;
 
         ack[5] = 1;
         ack[6] = 0;
-        ack[7] = 0;
+
+ * ack[7] = 0;
         ack[8] = 0;
 
         ack[9] = 2;
         ack[10] = 0;
-        ack[11] = 0;
+
+ * ack[11] = 0;
         ack[12] = 0;
 
         ack[13] = 3;
         ack[14] = 0;
-        ack[15] = 0;
+
+ * ack[15] = 0;
         ack[16] = 0;
         //Sleep(10);
-        constructPacket(ack, 17, 0x06);
+ constructPacket(ack,
+ * 17, 0x06);
 }
 */
 
@@ -7122,11 +7248,14 @@ void showOptions(char show) {
 
     /*ShowWindow(lblP2PServer, SW_HIDE);
     ShowWindow(txtP2PServer, SW_HIDE);
-    ShowWindow(lblP2PPort, SW_HIDE);
+
+     * ShowWindow(lblP2PPort, SW_HIDE);
     ShowWindow(txtP2PPort, SW_HIDE);
-    ShowWindow(btnP2PStart, SW_HIDE);
+
+     * ShowWindow(btnP2PStart, SW_HIDE);
     ShowWindow(btnP2PServer, SW_HIDE);
-    ShowWindow(btnP2PConnect, SW_HIDE);*/
+
+     * ShowWindow(btnP2PConnect, SW_HIDE);*/
   }
   // Login Info
   else if (show == 1) {
@@ -7169,11 +7298,14 @@ void showOptions(char show) {
 
     /*ShowWindow(lblP2PServer, SW_HIDE);
     ShowWindow(txtP2PServer, SW_HIDE);
-    ShowWindow(lblP2PPort, SW_HIDE);
+
+     * ShowWindow(lblP2PPort, SW_HIDE);
     ShowWindow(txtP2PPort, SW_HIDE);
-    ShowWindow(btnP2PStart, SW_HIDE);
+
+     * ShowWindow(btnP2PStart, SW_HIDE);
     ShowWindow(btnP2PServer, SW_HIDE);
-    ShowWindow(btnP2PConnect, SW_HIDE);*/
+
+     * ShowWindow(btnP2PConnect, SW_HIDE);*/
   }
   // Gameroom Options
   else if (show == 2) {
@@ -7216,11 +7348,14 @@ void showOptions(char show) {
 
     /*ShowWindow(lblP2PServer, SW_HIDE);
     ShowWindow(txtP2PServer, SW_HIDE);
-    ShowWindow(lblP2PPort, SW_HIDE);
+
+     * ShowWindow(lblP2PPort, SW_HIDE);
     ShowWindow(txtP2PPort, SW_HIDE);
-    ShowWindow(btnP2PStart, SW_HIDE);
+
+     * ShowWindow(btnP2PStart, SW_HIDE);
     ShowWindow(btnP2PServer, SW_HIDE);
-    ShowWindow(btnP2PConnect, SW_HIDE);*/
+
+     * ShowWindow(btnP2PConnect, SW_HIDE);*/
   }
   // Emulinker Options
   else if (show == 3) {
@@ -7263,54 +7398,79 @@ void showOptions(char show) {
 
     /*ShowWindow(lblP2PServer, SW_HIDE);
     ShowWindow(txtP2PServer, SW_HIDE);
-    ShowWindow(lblP2PPort, SW_HIDE);
+
+     * ShowWindow(lblP2PPort, SW_HIDE);
     ShowWindow(txtP2PPort, SW_HIDE);
-    ShowWindow(btnP2PStart, SW_HIDE);
+
+     * ShowWindow(btnP2PStart, SW_HIDE);
     ShowWindow(btnP2PServer, SW_HIDE);
-    ShowWindow(btnP2PConnect, SW_HIDE);*/
+
+     * ShowWindow(btnP2PConnect, SW_HIDE);*/
   }
   // P2P Options
   /*else if(show == 4){
           ShowWindow(txtServerIP, SW_HIDE);
-          ShowWindow(txtUsername, SW_HIDE);
+
+   * ShowWindow(txtUsername, SW_HIDE);
           ShowWindow(txtQuit, SW_HIDE);
-          ShowWindow(cmbConnectionType, SW_HIDE);
-          ShowWindow(chkShowError, SW_HIDE);
+
+   * ShowWindow(cmbConnectionType, SW_HIDE);
+          ShowWindow(chkShowError,
+   * SW_HIDE);
           ShowWindow(chkDrop, SW_HIDE);
-          ShowWindow(btnChatroom, SW_SHOW);
+ ShowWindow(btnChatroom,
+   * SW_SHOW);
           ShowWindow(chkKeepGameChatLogs, SW_HIDE);
-          ShowWindow(chkKeepChatLogs, SW_HIDE);
-          ShowWindow(chkUseCache, SW_HIDE);
+
+   * ShowWindow(chkKeepChatLogs, SW_HIDE);
+          ShowWindow(chkUseCache,
+   * SW_HIDE);
           ShowWindow(chkBlink, SW_HIDE);
 
-          //ShowWindow(lblStats, SW_HIDE);
+ //ShowWindow(lblStats,
+   * SW_HIDE);
           ShowWindow(btnLogoff, SW_HIDE);
-          ShowWindow(btnLogin, SW_HIDE);
+ ShowWindow(btnLogin,
+   * SW_HIDE);
 
           ShowWindow(chkBeep, SW_HIDE);
-          ShowWindow(chkJoinChatGame, SW_HIDE);
-          ShowWindow(chkUseScreenChat, SW_HIDE);
+
+   * ShowWindow(chkJoinChatGame, SW_HIDE);
+ ShowWindow(chkUseScreenChat,
+   * SW_HIDE);
           ShowWindow(chkJoinChat, SW_HIDE);
-          ShowWindow(chkCreate, SW_HIDE);
-          ShowWindow(chkJoinDbl, SW_HIDE);
+
+   * ShowWindow(chkCreate, SW_HIDE);
+          ShowWindow(chkJoinDbl,
+   * SW_HIDE);
 
           ShowWindow(txtMaxUsers, SW_HIDE);
-          ShowWindow(lblMaxUsers, SW_HIDE);
-          ShowWindow(txtMaxPing, SW_HIDE);
+
+   * ShowWindow(lblMaxUsers, SW_HIDE);
+          ShowWindow(txtMaxPing,
+   * SW_HIDE);
           ShowWindow(lblMaxPing, SW_HIDE);
-          ShowWindow(chkFakeP2P, SW_HIDE);
-          ShowWindow(chkEmulinkerSF, SW_HIDE);
+
+   * ShowWindow(chkFakeP2P, SW_HIDE);
+          ShowWindow(chkEmulinkerSF,
+   * SW_HIDE);
           ShowWindow(chkEmuRes, SW_HIDE);
-          ShowWindow(chkConnRes, SW_HIDE);
+ ShowWindow(chkConnRes,
+   * SW_HIDE);
           ShowWindow(btnVersion, SW_HIDE);
 
-          ShowWindow(lblP2PServer, SW_SHOW);
-          ShowWindow(txtP2PServer, SW_SHOW);
+
+   * ShowWindow(lblP2PServer, SW_SHOW);
+          ShowWindow(txtP2PServer,
+   * SW_SHOW);
           ShowWindow(lblP2PPort, SW_SHOW);
-          ShowWindow(txtP2PPort, SW_SHOW);
-          ShowWindow(btnP2PStart, SW_SHOW);
+
+   * ShowWindow(txtP2PPort, SW_SHOW);
+          ShowWindow(btnP2PStart,
+   * SW_SHOW);
           ShowWindow(btnP2PServer, SW_SHOW);
-          ShowWindow(btnP2PConnect, SW_SHOW);
+
+   * ShowWindow(btnP2PConnect, SW_SHOW);
   }*/
 }
 
@@ -8238,10 +8398,12 @@ void gameCacheRecv(unsigned short position, int slot) {
 /*
 //0x13 - Game Cache Send
 void gameCacheSend(char pos){
-        char dataToBeSent[2];
+        char
+ * dataToBeSent[2];
 
         dataToBeSent[0] = 0x00;
-        dataToBeSent[1] = pos;
+        dataToBeSent[1] =
+ * pos;
 
         constructPacket(dataToBeSent, 2, 0x13);
 }
@@ -8393,14 +8555,20 @@ char *strToLower(TCHAR *str) {
 }
 
 /*
-        This callback function is called by the ListView to compare two items.
-        This is done in response to ListView_SortItemsEx().  Though the
-   description of this function in MSDN can be confusing, it's actually very
+        This callback function is called by the ListView to compare two
+ * items.
+        This is done in response to ListView_SortItemsEx().  Though
+ * the
+   description of this function in MSDN can be confusing, it's actually
+ * very
    simple to write.
 
-        In this particular function, we first get the text of the two items we
-        are comparing.  Then, based on the column that we are sorting for, we
-        either compare the string value (column 0) or numeric value (column 1).
+        In this particular function, we first get
+ * the text of the two items we
+        are comparing.  Then, based on the
+ * column that we are sorting for, we
+        either compare the string value
+ * (column 0) or numeric value (column 1).
 */
 int CALLBACK lstUserlistCompareFunc(LPARAM i1, LPARAM i2, LPARAM) {
   TCHAR tsz1[1024];
