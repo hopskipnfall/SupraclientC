@@ -55,22 +55,20 @@ void connectionRejectedNotification(unsigned short position, int slot);
 // 0x17 - Server Information Message
 void serverInformationMessage(unsigned short position, int slot);
 
-struct RECENT_SERVERS
-{
-	char server[1024];
-	char ip[1024];
-	char location[1024];
+struct RECENT_SERVERS {
+  char server[1024];
+  char ip[1024];
+  char location[1024];
 };
 int const RECENT_MAX = 25;
 RECENT_SERVERS recentServers[RECENT_MAX];
 int recentCount = -1;
 
-struct FAVORITE_SERVERS
-{
-	char server[1024];
-	char ip[1024];
-	char location[1024];
-	char comments[1024];
+struct FAVORITE_SERVERS {
+  char server[1024];
+  char ip[1024];
+  char location[1024];
+  char comments[1024];
 };
 int const FAVORITE_MAX = 25;
 FAVORITE_SERVERS favoriteServers[FAVORITE_MAX];
@@ -100,13 +98,20 @@ void gotoMessageType(unsigned short position, char msgType, int slot);
 void parseWaitingGames();
 void parseServerList3D();
 void displayStats();
-void kServerlistAdditem(char *serverName, char *ip, char *ping, char *location, char *users, char *games, char *version);
-void Serverlist3DAdditem(char *serverName, char *ip, char *ping, char *location, char *users, char *games, char *version);
-void waitinglistAdditem(char *game, char *emulator, char *username, char *server, char *ip, char *location, char *numPlayers);
+void kServerlistAdditem(char *serverName, char *ip, char *ping, char *location,
+                        char *users, char *games, char *version);
+void Serverlist3DAdditem(char *serverName, char *ip, char *ping, char *location,
+                         char *users, char *games, char *version);
+void waitinglistAdditem(char *game, char *emulator, char *username,
+                        char *server, char *ip, char *location,
+                        char *numPlayers);
 void recentlistAdditem(char *server, char *ip, char *location);
-void favoritelistAdditem(char *server, char *ip, char *location, char *comments);
-void gamelistAdditem(char *game, char *version, char *owner, char *status, char *numUsers, char *gameID);
-void userlistAdditem(char *nick, char *ping, char *connection, char *userID, char *status);
+void favoritelistAdditem(char *server, char *ip, char *location,
+                         char *comments);
+void gamelistAdditem(char *game, char *version, char *owner, char *status,
+                     char *numUsers, char *gameID);
+void userlistAdditem(char *nick, char *ping, char *connection, char *userID,
+                     char *status);
 void userlistAdditemAll();
 void gamelistAdditemAll();
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -124,40 +129,57 @@ int CALLBACK lstServerlist3DCompareFunc(LPARAM i1, LPARAM i2, LPARAM);
 int CALLBACK lstWaitinglistCompareFunc(LPARAM i1, LPARAM i2, LPARAM);
 int CALLBACK lstRecentlistCompareFunc(LPARAM i1, LPARAM i2, LPARAM);
 int CALLBACK lstFavoritelistCompareFunc(LPARAM i1, LPARAM i2, LPARAM);
-long CALLBACK SubProcTxtChat(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+long CALLBACK SubProcTxtChat(HWND hwnd, UINT message, WPARAM wParam,
+                             LPARAM lParam);
 WNDPROC EditProcTxtChat;
-long CALLBACK SubProcTxtGameChat(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+long CALLBACK SubProcTxtGameChat(HWND hwnd, UINT message, WPARAM wParam,
+                                 LPARAM lParam);
 WNDPROC EditProcTxtGameChat;
-long CALLBACK SubProcTxtMaxUsers(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+long CALLBACK SubProcTxtMaxUsers(HWND hwnd, UINT message, WPARAM wParam,
+                                 LPARAM lParam);
 WNDPROC EditProcTxtMaxUsers;
-long CALLBACK SubProcTxtMaxPing(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+long CALLBACK SubProcTxtMaxPing(HWND hwnd, UINT message, WPARAM wParam,
+                                LPARAM lParam);
 WNDPROC EditProcTxtMaxPing;
-long CALLBACK SubProcTxtChatroom(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+long CALLBACK SubProcTxtChatroom(HWND hwnd, UINT message, WPARAM wParam,
+                                 LPARAM lParam);
 WNDPROC EditProcTxtChatroom;
-long CALLBACK SubProcTxtIP(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+long CALLBACK SubProcTxtIP(HWND hwnd, UINT message, WPARAM wParam,
+                           LPARAM lParam);
 WNDPROC EditProcTxtIP;
-long CALLBACK SubProcTxtQuit(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+long CALLBACK SubProcTxtQuit(HWND hwnd, UINT message, WPARAM wParam,
+                             LPARAM lParam);
 WNDPROC EditProcTxtQuit;
-long CALLBACK SubProcTxtNick(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+long CALLBACK SubProcTxtNick(HWND hwnd, UINT message, WPARAM wParam,
+                             LPARAM lParam);
 WNDPROC EditProcTxtNick;
 
 char *strToLower(TCHAR *str);
 
 // Control Properties
-DWORD const formProperties = WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU | WS_CAPTION | WS_VISIBLE;
-DWORD const formOtherProperties = WS_OVERLAPPED | WS_SYSMENU | WS_CAPTION | WS_VISIBLE;
-DWORD const buttonProperties = BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP;
-DWORD const frameProperties = BS_GROUPBOX | WS_CHILD | BS_DEFPUSHBUTTON | WS_VISIBLE;
-DWORD const textboxProperties = WS_CHILD | WS_BORDER | WS_VISIBLE | WS_TABSTOP | ES_AUTOHSCROLL;
-DWORD const comboboxProperties = CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP | WS_VISIBLE;
+DWORD const formProperties =
+    WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU | WS_CAPTION | WS_VISIBLE;
+DWORD const formOtherProperties =
+    WS_OVERLAPPED | WS_SYSMENU | WS_CAPTION | WS_VISIBLE;
+DWORD const buttonProperties =
+    BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP;
+DWORD const frameProperties =
+    BS_GROUPBOX | WS_CHILD | BS_DEFPUSHBUTTON | WS_VISIBLE;
+DWORD const textboxProperties =
+    WS_CHILD | WS_BORDER | WS_VISIBLE | WS_TABSTOP | ES_AUTOHSCROLL;
+DWORD const comboboxProperties = CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE |
+                                 WS_VSCROLL | WS_TABSTOP | WS_VISIBLE;
 DWORD const richTextboxProperties = ES_MULTILINE | WS_CHILD | WS_VISIBLE;
-DWORD const listviewProperties = LVS_SHOWSELALWAYS | LVS_REPORT | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_TABSTOP;
+DWORD const listviewProperties = LVS_SHOWSELALWAYS | LVS_REPORT |
+                                 LVS_SINGLESEL | WS_CHILD | WS_VISIBLE |
+                                 WS_TABSTOP;
 DWORD const controlStyles = NULL;
 DWORD const formStyles = WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE;
 DWORD const listviewStyles = LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES;
 DWORD const labelProperties = SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP;
 DWORD const tabProperties = TCS_TABS | WS_CHILD | WS_VISIBLE | WS_TABSTOP;
-DWORD const checkProperties = BS_AUTOCHECKBOX | BS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_TABSTOP;
+DWORD const checkProperties =
+    BS_AUTOCHECKBOX | BS_NOTIFY | WS_CHILD | WS_VISIBLE | WS_TABSTOP;
 HWND form1;
 HWND txtGame;
 HWND btnChatroom;
@@ -226,12 +248,11 @@ HWND lstRecentList;
 HWND lstWaitingList;
 HWND lstFavoriteList;
 
-struct AWAY_MESSAGES
-{
-	char subject[1024];
-	char message[1024];
-	int item;
-	bool save;
+struct AWAY_MESSAGES {
+  char subject[1024];
+  char message[1024];
+  int item;
+  bool save;
 };
 AWAY_MESSAGES awayMessages[10];
 int awayMessageCount = 0;
@@ -370,12 +391,11 @@ sockaddr_in socketInfoK;
 sockaddr_in socketInfo3D;
 sockaddr_in socketInfoWaiting;
 
-struct SERVER_LIST
-{
-	char host[128];
-	char link[128];
-	char wglink[128];
-	unsigned long port;
+struct SERVER_LIST {
+  char host[128];
+  char link[128];
+  char wglink[128];
+  unsigned long port;
 };
 
 SERVER_LIST kailleraServerList;
@@ -383,10 +403,9 @@ SERVER_LIST anti3DServerList;
 // http://master.anti3d.com/raw_server_list2.php
 // http://kaillera.com/raw_server_list2.php?wg=1&version=0.9
 
-struct USER_LIST_COMMANDS
-{
-	char commands[128];
-	int time;
+struct USER_LIST_COMMANDS {
+  char commands[128];
+  int time;
 };
 
 USER_LIST_COMMANDS userlistCommands[60];
@@ -423,60 +442,54 @@ unsigned short const MESSAGE_SIZE = 15;
 unsigned short const MESSAGE_LENGTH = 5000;
 unsigned short const MAX_INCOMING_BUFFER = 15;
 
-struct INCOMING_BUFFER
-{
-	char myBuff[MESSAGE_LENGTH * MESSAGE_SIZE];
+struct INCOMING_BUFFER {
+  char myBuff[MESSAGE_LENGTH * MESSAGE_SIZE];
 };
 
 INCOMING_BUFFER myBuff[MAX_INCOMING_BUFFER];
 int myBuffCount = -1;
 
-struct Messages
-{
-	// char msgData[MESSAGE_LENGTH];
-	unsigned char msgType;
-	unsigned short msgLen;
-	// unsigned short msgNum;
-	unsigned long msgPos;
+struct Messages {
+  // char msgData[MESSAGE_LENGTH];
+  unsigned char msgType;
+  unsigned short msgLen;
+  // unsigned short msgNum;
+  unsigned long msgPos;
 };
 Messages serverMessage[MESSAGE_SIZE];
 
-enum ConnectionType
-{
-	lan = 1,
-	excellent = 2,
-	good = 3,
-	average = 4,
-	low = 5,
-	bad = 6
+enum ConnectionType {
+  lan = 1,
+  excellent = 2,
+  good = 3,
+  average = 4,
+  low = 5,
+  bad = 6
 };
 
-struct USERS
-{
-	char nick[1024];
-	char ping[1024];
-	char status[1024];
-	char userID[1024];
-	char type[1024];
+struct USERS {
+  char nick[1024];
+  char ping[1024];
+  char status[1024];
+  char userID[1024];
+  char type[1024];
 };
 USERS tempUsers[1000];
 int tempUserCount = 0;
 
-struct GAMES
-{
-	char game[1024];
-	char gameID[1024];
-	char emulator[1024];
-	char owner[1024];
-	char users[1024];
-	char status[1024];
+struct GAMES {
+  char game[1024];
+  char gameID[1024];
+  char emulator[1024];
+  char owner[1024];
+  char users[1024];
+  char status[1024];
 };
 GAMES tempGames[1000];
 int tempGameCount = 0;
 
-struct Packets
-{
-	char packet[6000];
+struct Packets {
+  char packet[6000];
 };
 const int MAX_PACKETS = 3;
 const int NORMAL_PACKETS = 3;
@@ -493,7 +506,12 @@ unsigned long myPing;
 // ################
 char myVersion[17] = "SCCPPE v0.89.10\0";
 char cVersion[26] = "SupraclientCPPE v0.89.10\0";
-char initText[1024] = "Supraclient CPPE [C++ Edition]\r\nVersion: 0.89.10  Sunday Jan 22, 2023\r\nSpecial Thanks to: Trac, Moosehead, & r@z\r\nOther Testers: Morphus56K, Paramount, Agenda Suicide, & okaygo\r\nAuthor: SupraFast - Daniel Strusser\r\nEmail: Dynomite1234@aol.com\r\n\r\n#To get started, click on the button below that says [Servers]\n\0";
+char initText[1024] =
+    "Supraclient CPPE [C++ Edition]\r\nVersion: 0.89.10  Sunday Jan 22, "
+    "2023\r\nSpecial Thanks to: Trac, Moosehead, & r@z\r\nOther Testers: "
+    "Morphus56K, Paramount, Agenda Suicide, & okaygo\r\nAuthor: SupraFast - "
+    "Daniel Strusser\r\nEmail: Dynomite1234@aol.com\r\n\r\n#To get started, "
+    "click on the button below that says [Servers]\n\0";
 char quit[1024] = "I'm using SupraclientCPPE v0.89.10\0";
 // ################
 bool chatroom;
@@ -503,9 +521,8 @@ long myGameID = -1;
 long myUserID = -1;
 hostent *hp;
 
-struct Games
-{
-	char game[1024];
+struct Games {
+  char game[1024];
 };
 char lastGameToPlay1[1024] = "LastGameToPlay1\0";
 char lastGameToPlay2[1024] = "LastGameToPlay2\0";
@@ -523,7 +540,8 @@ unsigned short inputSize;
 int sizeOfEinput;
 bool startedGame = false;
 bool iQuit = false;
-char currentGame[128]; // = "Marvel Vs. Capcom: Clash of Super Heroes (US 980123)";
+char currentGame[128]; // = "Marvel Vs. Capcom: Clash of Super Heroes (US
+                       // 980123)";
 char gOwner[1024];
 char gEmulator[1024];
 char stage = 0;
